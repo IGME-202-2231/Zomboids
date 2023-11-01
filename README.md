@@ -1,4 +1,4 @@
-# Project _NAME_
+# Project Owen Beck
 
 [Markdown Cheatsheet](https://github.com/adam-p/markdown-here/wiki/Markdown-Here-Cheatsheet)
 
@@ -6,12 +6,12 @@ _REPLACE OR REMOVE EVERYTING BETWEEN "\_"_
 
 ### Student Info
 
--   Name: _YOUR NAME_
--   Section: _##_
+-   Name: Owen Beck
+-   Section: 3
 
 ## Simulation Design
 
-_A brief explanation of your simulation._
+My simulation will create a map of streets and simulate cars moving on them according to traffic
 
 ### Controls
 
