@@ -24,14 +24,28 @@ Player can click to spawn zombies.
 
 This agent is just a human wandering slowly with an idle sprite attached.
 
+#### State Transistions
+
+- Humans all start in this state
+
 ## Human Fleeing
 This agent is a human fleeing from a zombie, has a scared sprite attached.
+
+#### State Transistions
+
+- Humans turn into fleers when a zombie is introduced into the scene
 
 # Zombie Transformation
 This agent is a human turning into a zombie. Pauses as it transforms. Has a half zombie sprite attached.
 
+#### State Transistions
+- Humans transform on collision with a zombie
+
 ## Zombie Seeker
 This agent is a zombie that seeks nearest human fleer.
+
+#### State Transistions
+- Humans turn into zombie after the transform timer ends
 
 ### State 1: Human Idle
 
@@ -57,58 +71,7 @@ This agent is a zombie that seeks nearest human fleer.
 - Obstacles - _List all obstacle types this state avoids_
 - Seperation - _List all agents this state seperates from_
    
-#### State Transistions
-
-- Humans turn into fleers when a zombie is introduced into the scene
-- Humans transform on collision with a zombie
-- Humans turn into zombie after the transform timer ends
    
-### _State 2 Name_
-
-**Objective:** _A brief explanation of this state's objective._
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-
-## _Agent 2 Name_
-
-_A brief explanation of this agent._
-
-### _State 1 Name_
-
-**Objective:** _A brief explanation of this state's objective._
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-   
-### _State 2 Name_
-
-**Objective:** _A brief explanation of this state's objective._
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
-   
-#### State Transistions
-
-- _List all the ways this agent can transition to this state_
-
 ## Sources
 
 -   _List all project sources here –models, textures, sound clips, assets, etc._
