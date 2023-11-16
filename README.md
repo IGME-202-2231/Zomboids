@@ -20,6 +20,7 @@ Player can click to spawn zombies.
     -This is done with the mouse
     -Spawning zombies more frequently will cause the game to end quicker.
 
+#Agents
 ## Human Idle
 
 This agent is just a human wandering slowly with an idle sprite attached.
@@ -35,7 +36,7 @@ This agent is a human fleeing from a zombie, has a scared sprite attached.
 
 - Humans turn into fleers when a zombie is introduced into the scene
 
-# Zombie Transformation
+## Zombie Transformation
 This agent is a human turning into a zombie. Pauses as it transforms. Has a half zombie sprite attached.
 
 #### State Transistions
@@ -62,20 +63,11 @@ This agent is a zombie that seeks nearest human fleer.
 ### State 4: Zombie
 
 **Objective:** Seeks out nearest human
-
-#### Steering Behaviors
-
-- _List all behaviors used by this state_
-   - _If behavior has input data list it here_
-   - _eg, Flee - nearest Agent2_
-- Obstacles - _List all obstacle types this state avoids_
-- Seperation - _List all agents this state seperates from_
    
    
 ## Sources
 
--   _List all project sources here –models, textures, sound clips, assets, etc._
--   _If an asset is from the Unity store, include a link to the page and the author’s name_
+-   All Art assets are made by me
 
 ## Make it Your Own
 
