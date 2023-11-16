@@ -48,6 +48,7 @@ This agent is a zombie that seeks nearest human fleer.
 #### State Transistions
 - Humans turn into zombie after the transform timer ends
 
+# States
 ### State 1: Human Idle
 
 **Objective:** Idle humans just wander carelessly.
