@@ -20,7 +20,7 @@ Player can click to spawn zombies.
     -This is done with the mouse
     -Spawning zombies more frequently will cause the game to end quicker.
 
-#Agents
+# Agents
 ## Human Idle
 
 This agent is just a human wandering slowly with an idle sprite attached.
