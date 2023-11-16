@@ -121,7 +121,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPhysicsObject: {fileID: 913542301127720503}
   maxForce: 10
-  separationRange: 0
+  separationRange: 0.03
   wanderTime: 1
   wanderRadius: 1
   boundsWeight: 1000
