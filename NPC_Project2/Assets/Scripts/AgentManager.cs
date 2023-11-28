@@ -5,35 +5,52 @@ using UnityEngine;
 public class AgentManager : MonoBehaviour
 {
     [SerializeField]
-    Wanderer wandererPrefab;
+    //TagPlayer playerPrefab;
+    Wanderer playerPrefab;
 
     List<Agent> agents;
 
+    public Sprite[] tagSprites; //Sprite Array
+
     [SerializeField]
-    uint numWanderers;
+    private float countTimer;
+
+    public float CountTimer { get { return countTimer; } }
+
+    [SerializeField]
+    uint playerCount;
 
     public List<Agent> Agents { get { return agents; } }
+
+    public Agent itPlayer; //keep track of who is it
 
     // Start is called before the first frame update
     void Start()
     {
         agents = new List<Agent>();
-        for(int i = 0; i < numWanderers; i++)
+        for (int i = 0; i < playerCount; i++)
         {
-            SpawnWanderer();
+            SpawnPlayer();
         }
+        /*
+        if(agents.Count > 0)
+        {
+            ((TagPlayer)agents[0]).SetState(TagStates.Counting);
+            itPlayer = agents[0];   //Assign who is it
+        } */
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    private void SpawnWanderer()
+    private void SpawnPlayer()
     {
-        Wanderer wanderer = Instantiate(wandererPrefab, transform);
-        wanderer.AgentManager = this;
-        agents.Add(wanderer);
+        Wanderer newAgent = Instantiate(playerPrefab, transform);
+        newAgent.AgentManager = this;
+        agents.Add(newAgent);
+        FlockManager.Instance.flock.Add(newAgent);
     }
 }

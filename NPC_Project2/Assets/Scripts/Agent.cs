@@ -20,7 +20,7 @@ public abstract class Agent : MonoBehaviour //Cannot instantiate abstract class
     [SerializeField]
     private float separationRange = 1.0f;
 
-    private AgentManager agentManager;
+    protected AgentManager agentManager;
 
     public AgentManager AgentManager
     { set { agentManager = value; } }
@@ -113,9 +113,9 @@ public abstract class Agent : MonoBehaviour //Cannot instantiate abstract class
     {
         Vector3 separateForce = Vector3.zero;
 
-        foreach(Agent a in agentManager.Agents)
+        foreach (Agent a in agentManager.Agents)
         {
-            if( a== this) { continue; }
+            if (a == this) { continue; }
 
             float distance = Vector3.Distance(transform.position, a.transform.position);
             distance += 0.000001f;
@@ -126,4 +126,38 @@ public abstract class Agent : MonoBehaviour //Cannot instantiate abstract class
         return separateForce;
     }
 
+    //Finds closest agent by starting with null and returning nearest.
+    protected Agent FindClosest()
+    {
+        float minDist = Mathf.Infinity;
+        Agent nearest = null;
+
+        foreach (Agent a in agentManager.Agents)
+        {
+            if (a == this) { continue; }
+
+            float dist = Vector2.Distance(transform.position, a.transform.position);
+
+            if (dist < minDist)
+            {
+                minDist = dist;
+                nearest = a;
+            }
+        }
+
+        return nearest;
+    }
+
+    protected Vector3 Cohesion()
+    {
+        return Seek(FlockManager.Instance.CenterPoint);
+    }
+
+    protected Vector3 Alignment()
+    {
+        Vector3 desiredVelocity = FlockManager.Instance.SharedDirection *
+            myPhysicsObject.MaxSpeed;
+
+        return desiredVelocity - myPhysicsObject.Velocity;
+    }
 }

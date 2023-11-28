@@ -33,7 +33,12 @@ public class PhysicsObject : MonoBehaviour
     float maxSpeed = 1;
 
     [SerializeField]
-    float radius;
+    public float radius;
+
+    public float Radius
+    {
+        get { return radius; }
+    }
 
     public float MaxSpeed
     {
@@ -153,7 +158,13 @@ public class PhysicsObject : MonoBehaviour
     {
         Gizmos.color = Color.green;
 
-        Gizmos.DrawWireSphere(transform.position, radius);
+        //Gizmos.DrawWireSphere(transform.position, radius);
+    }
+
+    public void StopMoving() //Stops counter from moving while applied
+    {
+        acceleration = Vector3.zero;
+        velocity = Vector3.zero;
     }
 
 }
