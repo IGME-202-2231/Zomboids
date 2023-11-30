@@ -20,6 +20,8 @@ public abstract class Agent : MonoBehaviour //Cannot instantiate abstract class
     [SerializeField]
     private float separationRange = 1.0f;
 
+    protected List<Vector3> foundObstacles = new List<Vector3>();
+
     protected AgentManager agentManager;
 
     public AgentManager AgentManager
@@ -159,5 +161,46 @@ public abstract class Agent : MonoBehaviour //Cannot instantiate abstract class
             myPhysicsObject.MaxSpeed;
 
         return desiredVelocity - myPhysicsObject.Velocity;
+    }
+
+    protected Vector3 AvoidObstacles(float avoidTime)
+    {
+        Vector3 avoidForce = Vector3.zero;
+        foundObstacles.Clear();
+
+        Vector3 futurePosition = CalcFuturePosition(avoidTime);
+        float maxDistance = Vector3.Distance(transform.position, futurePosition) + myPhysicsObject.Radius;
+
+        //Detect and avoid obstacles
+        foreach(Obstacle obst in agentManager.obstacles)
+        {
+            Vector3 agentToObstacle = obst.transform.position - transform.position;
+            float forwardDot = Vector3.Dot(agentToObstacle, myPhysicsObject.Velocity.normalized);
+
+            Vector3 rightward = Vector3.Cross(myPhysicsObject.Velocity.normalized, Vector3.forward);
+            float rightDot = Vector3.Dot(agentToObstacle, rightward);
+
+            if (forwardDot >= -obst.radius &&
+                forwardDot <= (maxDistance + obst.radius) &&
+                Mathf.Abs(rightDot) <= (myPhysicsObject.Radius + obst.radius))
+            {
+                //Refine this to only be obstacles in the way
+                foundObstacles.Add(obst.transform.position);
+
+                if(rightDot > 0) //if obstacle is to the right
+                {
+                    //Go Left
+                    avoidForce += transform.right * -1;
+
+                }
+                else //if obstacle is to the left or in front
+                {
+                    //Go Right
+                    avoidForce += transform.right;
+                }
+            }
+        }
+
+        return avoidForce;
     }
 }

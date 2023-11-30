@@ -31,6 +31,10 @@ public class Wanderer : Agent
     float alignmentWeight;
 
     [SerializeField]
+    [Range(0.0f, 25f)]
+    float avoidWeight;
+
+    [SerializeField]
     float avoidTime = 1.0f;
 
 
@@ -41,6 +45,7 @@ public class Wanderer : Agent
         //totalForce += Separate() * seperateWeight;
         //totalForce += Cohesion() * cohesionWight;
         //totalForce += Alignment() * alignmentWeight;
+        totalForce += AvoidObstacles(avoidTime) * avoidWeight;
     }
 
     private void OnDrawGizmosSelected()
@@ -65,5 +70,11 @@ public class Wanderer : Agent
         Gizmos.DrawWireCube(Vector3.zero, boxSize);
 
         Gizmos.matrix = Matrix4x4.identity;
+
+        Gizmos.color = Color.red;
+        foreach(Vector3 pos in foundObstacles)
+        {
+            Gizmos.DrawLine(transform.position, pos);
+        }
     }
 }

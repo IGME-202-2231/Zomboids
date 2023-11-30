@@ -12,6 +12,8 @@ public class AgentManager : MonoBehaviour
 
     public Sprite[] tagSprites; //Sprite Array
 
+    public List<Obstacle> obstacles;
+
     [SerializeField]
     private float countTimer;
 
