@@ -55,4 +55,6 @@ public class AgentManager : MonoBehaviour
         agents.Add(newAgent);
         FlockManager.Instance.flock.Add(newAgent);
     }
+
+
 }

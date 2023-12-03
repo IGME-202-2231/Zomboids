@@ -42,20 +42,14 @@ public class Wanderer : Agent
     {
         totalForce += Wander(wanderTime, wanderRadius);
         totalForce += StayInBoundsForce() * boundsWeight;
-        //totalForce += Separate() * seperateWeight;
-        //totalForce += Cohesion() * cohesionWight;
-        //totalForce += Alignment() * alignmentWeight;
+        totalForce += Separate() * seperateWeight;
+        totalForce += Cohesion() * cohesionWight;
+        totalForce += Alignment() * alignmentWeight;
         totalForce += AvoidObstacles(avoidTime) * avoidWeight;
     }
 
     private void OnDrawGizmosSelected()
     {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(CalcFuturePosition(wanderTime), wanderRadius);
-        //
-        //Gizmos.color = Color.green;
-        //Gizmos.DrawLine(transform.position, wanderTarget);
-
         Vector3 futurePosition = CalcFuturePosition(avoidTime);
 
         float dist = Vector3.Distance(transform.position, futurePosition) + myPhysicsObject.Radius;
@@ -76,5 +70,6 @@ public class Wanderer : Agent
         {
             Gizmos.DrawLine(transform.position, pos);
         }
+
     }
 }
