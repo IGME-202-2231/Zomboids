@@ -81,6 +81,7 @@ public class FSM : Agent
                 totalForce += Wander(wanderTime, wanderRadius);
                 totalForce += Separate();
                 totalForce += Flee(agentManager.zombie.transform.position) * fleeWeight;
+                totalForce += AvoidObstacles(avoidTime) * avoidWeight;
 
                 break;
 
