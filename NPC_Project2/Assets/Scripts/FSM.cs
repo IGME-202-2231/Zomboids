@@ -24,6 +24,29 @@ public class FSM : Agent
     [SerializeField]
     SpriteRenderer sRenderer;
 
+    [SerializeField]
+    [Range(0.0f, 25f)]
+    float wanderWeight;
+
+    [SerializeField]
+    [Range(0.0f, 25)]
+    float seperateWeight;
+
+    [SerializeField]
+    [Range(0.0f, 25f)]
+    float cohesionWight;
+
+    [SerializeField]
+    [Range(0.0f, 25f)]
+    float alignmentWeight;
+
+    [SerializeField]
+    [Range(0.0f, 25f)]
+    float avoidWeight;
+
+    [SerializeField]
+    float avoidTime = 1.0f;
+
     //Control Flee Weight
     [SerializeField]
     [Range(0.0f, 100.0f)]
@@ -34,6 +57,7 @@ public class FSM : Agent
 
     FSM target;
 
+
     protected override void CalcSteeringForces()
     {
         //Switch statement for FSM
@@ -41,14 +65,23 @@ public class FSM : Agent
         {
             case States.HumanWander:
                 totalForce += Wander(wanderTime, wanderRadius);
-                totalForce += Separate();
-                totalForce += Flee(agentManager.itPlayer.transform.position) * fleeWeight;
+                totalForce += StayInBoundsForce() * boundsWeight;
+                totalForce += Separate() * seperateWeight;
+                totalForce += Cohesion() * cohesionWight;
+                totalForce += Alignment() * alignmentWeight;
+                totalForce += AvoidObstacles(avoidTime) * avoidWeight;
+
+                if (agentManager != null && agentManager.ZombieSpawned)
+                {
+                    SetState(States.HumanFlee);
+                }
                 break;
 
             case States.HumanFlee:
                 totalForce += Wander(wanderTime, wanderRadius);
                 totalForce += Separate();
-                totalForce += Flee(agentManager.itPlayer.transform.position) * fleeWeight;
+                totalForce += Flee(agentManager.zombie.transform.position) * fleeWeight;
+
                 break;
 
             case States.Transformer:
@@ -66,7 +99,13 @@ public class FSM : Agent
 
                 totalForce += Seek(target.transform.position);
 
+                if (Vector3.Distance(transform.position, target.transform.position) < myPhysicsObject.Radius + target.myPhysicsObject.Radius)
+                {
+                    target.SetState(States.Transformer);
+                }
+
                 break;
+
         }
         //Everything stays in bounds all the time
         totalForce += StayInBoundsForce() * boundsWeight;
@@ -81,7 +120,7 @@ public class FSM : Agent
         if (newState == States.Transformer)
         {
             myPhysicsObject.StopMoving();
-            agentManager.itPlayer = this;    //Tell agentManager that this player is it
+            agentManager.zombie = this;    //Tell agentManager that this player is a zombie
         }
     }
 }

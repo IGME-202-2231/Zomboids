@@ -40,7 +40,7 @@ public class TagPlayer : Agent
             case TagStates.NotIt:
                 totalForce += Wander(wanderTime, wanderRadius);
                 totalForce += Separate();
-                totalForce += Flee(agentManager.itPlayer.transform.position) * fleeWeight;
+                totalForce += Flee(agentManager.zombie.transform.position) * fleeWeight;
                 break;
 
             case TagStates.Counting:
@@ -78,7 +78,7 @@ public class TagPlayer : Agent
         if(newState == TagStates.Counting)
         {
             myPhysicsObject.StopMoving();
-            agentManager.itPlayer = this;    //Tell agentManager that this player is it
+            agentManager.zombie = this;    //Tell agentManager that this player is it
         }
     }
 }

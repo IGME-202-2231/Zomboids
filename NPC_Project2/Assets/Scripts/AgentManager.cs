@@ -5,8 +5,10 @@ using UnityEngine;
 public class AgentManager : MonoBehaviour
 {
     [SerializeField]
-    //TagPlayer playerPrefab;
-    Wanderer playerPrefab;
+    FSM humanPrefab;
+
+    [SerializeField]
+    FSM zombiePrefab;
 
     List<Agent> agents;
 
@@ -24,7 +26,11 @@ public class AgentManager : MonoBehaviour
 
     public List<Agent> Agents { get { return agents; } }
 
-    public Agent itPlayer; //keep track of who is it
+    public Agent zombie; //keep track of first zombie
+
+    private bool zombieSpawned = false;
+
+    public bool ZombieSpawned { get {  return zombieSpawned; } }
 
     // Start is called before the first frame update
     void Start()
@@ -45,16 +51,30 @@ public class AgentManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        SpawnZombie();
     }
 
     private void SpawnPlayer()
     {
-        Wanderer newAgent = Instantiate(playerPrefab, transform);
+        FSM newAgent = Instantiate(humanPrefab, transform);
         newAgent.AgentManager = this;
         agents.Add(newAgent);
         FlockManager.Instance.flock.Add(newAgent);
     }
 
+    private void SpawnZombie()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
 
+        // Check for LMB press
+        if (Input.GetMouseButtonDown(0))
+        {
+            zombieSpawned = true;
+            FSM zombie = Instantiate(zombiePrefab, mousePos, Quaternion.identity);
+            zombie.AgentManager = this;
+            agents.Add(zombie);
+            FlockManager.Instance.flock.Add(zombie);
+        }
+    }
 }

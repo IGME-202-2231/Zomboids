@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1781698701149660117}
   - component: {fileID: 2646627186815992147}
   - component: {fileID: 7975650931879018918}
-  - component: {fileID: -7043688838445101964}
+  - component: {fileID: -9161004029017022764}
   m_Layer: 0
   m_Name: Zomboid
   m_TagString: Untagged
@@ -107,7 +107,7 @@ MonoBehaviour:
   mass: 1
   maxSpeed: 2
   radius: 0
---- !u!114 &-7043688838445101964
+--- !u!114 &-9161004029017022764
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,10 +116,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 1810197858905622020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 676d95aa5ef8bc743bbe2e9c5374ba4f, type: 3}
+  m_Script: {fileID: 11500000, guid: a15817844c5900d478cca4e2e748845a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myPhysicsObject: {fileID: 7975650931879018918}
   maxForce: 10
-  separationRange: 1
-  target: {fileID: 4350942264190961647, guid: 896da717c3091744ba0243248c4838a2, type: 3}
+  separationRange: 0
+  wanderTime: 0
+  wanderRadius: 0
+  boundsWeight: 25
+  sRenderer: {fileID: 2646627186815992147}
+  wanderWeight: 0
+  seperateWeight: 0
+  cohesionWight: 0
+  alignmentWeight: 0
+  avoidWeight: 0
+  avoidTime: 1
+  fleeWeight: 0
