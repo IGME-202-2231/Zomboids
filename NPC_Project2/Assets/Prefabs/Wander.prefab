@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 7459401686351184481}
   - component: {fileID: 3142597154510560397}
   - component: {fileID: 6588267238877714361}
-  - component: {fileID: 3781255149036858219}
   - component: {fileID: -2099841831483374272}
   m_Layer: 0
   m_Name: Wander
@@ -29,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 2077780271642102232}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.039800614, y: 0.039800614, z: 0.039800614}
+  m_LocalScale: {x: 0.3908142, y: 0.3908142, z: 0.3908142}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3142597154510560397
 SpriteRenderer:
@@ -76,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 2fdbd94fb15536b46a82b62cb13ff915, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f2bbc941b10fe88409e1b1ebdb9f9254, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 28.8, y: 28.8}
+  m_Size: {x: 2.5, y: 2.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -106,32 +105,8 @@ MonoBehaviour:
   gravStrength: 0
   acceleration: {x: 0, y: 0, z: 0}
   mass: 1
-  maxSpeed: 1
-  radius: 3
---- !u!114 &3781255149036858219
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077780271642102232}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca297318dcb68e469e9d6f78b6e3277, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  myPhysicsObject: {fileID: 6588267238877714361}
-  maxForce: 10
-  separationRange: 0.05
-  wanderRadius: 2
-  wanderTime: 2
-  boundsWeight: 25
-  wanderWeight: 3
-  seperateWeight: 10.2
-  cohesionWight: 2.2
-  alignmentWeight: 0.8
-  avoidWeight: 15.6
-  avoidTime: 3
+  maxSpeed: 3
+  radius: 1
 --- !u!114 &-2099841831483374272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -146,15 +121,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPhysicsObject: {fileID: 6588267238877714361}
   maxForce: 10
-  separationRange: 0.05
+  separationRange: 0.3
   wanderTime: 2
   wanderRadius: 2
-  boundsWeight: 25
+  boundsWeight: 100000
   sRenderer: {fileID: 3142597154510560397}
   wanderWeight: 3
-  seperateWeight: 10.2
-  cohesionWight: 2.2
-  alignmentWeight: 0.8
+  seperateWeight: 18.1
+  cohesionWight: 18.8
+  alignmentWeight: 3.5
   avoidWeight: 15
   avoidTime: 2
-  fleeWeight: 61.7
+  fleeWeight: 21.5

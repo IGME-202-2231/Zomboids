@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1186490094537802411}
   - component: {fileID: 7951804685766636819}
   - component: {fileID: 913542301127720503}
-  - component: {fileID: 9178373681550769506}
+  - component: {fileID: -246855557149394876}
   m_Layer: 0
   m_Name: Flee
   m_TagString: Untagged
@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 4350942264190961647}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35476, y: 0.35476, z: 0.35476}
+  m_LocalScale: {x: 0.43316194, y: 0.43316194, z: 0.43316194}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &7951804685766636819
 SpriteRenderer:
@@ -75,12 +75,12 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 1623ab60e61118443b7d0fcff67fa59e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 9d683a9d2ce89064f9fe16b40ed8f0f0, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
-  m_Size: {x: 3.2, y: 3.2}
+  m_Size: {x: 3.5, y: 3.5}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -106,8 +106,8 @@ MonoBehaviour:
   acceleration: {x: 0, y: 0, z: 0}
   mass: 1
   maxSpeed: 1
-  radius: 3
---- !u!114 &9178373681550769506
+  radius: 1
+--- !u!114 &-246855557149394876
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -116,18 +116,20 @@ MonoBehaviour:
   m_GameObject: {fileID: 4350942264190961647}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ca297318dcb68e469e9d6f78b6e3277, type: 3}
+  m_Script: {fileID: 11500000, guid: a15817844c5900d478cca4e2e748845a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   myPhysicsObject: {fileID: 913542301127720503}
-  maxForce: 10
+  maxForce: 100
   separationRange: 1
-  wanderRadius: 1
   wanderTime: 1
-  boundsWeight: 25
-  wanderWeight: 1.2
+  wanderRadius: 1
+  boundsWeight: 1e+13
+  sRenderer: {fileID: 7951804685766636819}
+  wanderWeight: 0
   seperateWeight: 1.2
-  cohesionWight: 0.5
-  alignmentWeight: 0
-  avoidWeight: 23.2
+  cohesionWight: 2.5
+  alignmentWeight: 1.7
+  avoidWeight: 5.4
   avoidTime: 1
+  fleeWeight: 0.05

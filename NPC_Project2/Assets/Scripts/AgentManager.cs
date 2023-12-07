@@ -73,6 +73,7 @@ public class AgentManager : MonoBehaviour
             zombieSpawned = true;
             FSM zombie = Instantiate(zombiePrefab, mousePos, Quaternion.identity);
             zombie.AgentManager = this;
+            zombie.SetState(States.Zombie);
             agents.Add(zombie);
             FlockManager.Instance.flock.Add(zombie);
         }

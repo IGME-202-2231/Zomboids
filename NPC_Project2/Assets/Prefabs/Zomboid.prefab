@@ -28,11 +28,11 @@ Transform:
   m_GameObject: {fileID: 1810197858905622020}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.35045666, y: 0.35045666, z: 0.35045666}
+  m_LocalScale: {x: 0.44956577, y: 0.44956577, z: 0.44956577}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2646627186815992147
 SpriteRenderer:
@@ -98,15 +98,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a5d56286131dc2e42b0a1d516a6f6d0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  fleerPrefab: {fileID: 1810197858905622020}
+  fleerPrefab: {fileID: 0}
   frictionOn: 0
   gravOn: 0
   coeff: 0
   gravStrength: 0
   acceleration: {x: 0, y: 0, z: 0}
   mass: 1
-  maxSpeed: 2
-  radius: 0
+  maxSpeed: 1
+  radius: 1
 --- !u!114 &-9161004029017022764
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,7 +127,7 @@ MonoBehaviour:
   boundsWeight: 25
   sRenderer: {fileID: 2646627186815992147}
   wanderWeight: 0
-  seperateWeight: 0
+  seperateWeight: 1.5
   cohesionWight: 0
   alignmentWeight: 0
   avoidWeight: 0

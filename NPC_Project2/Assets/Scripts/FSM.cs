@@ -78,9 +78,12 @@ public class FSM : Agent
                 break;
 
             case States.HumanFlee:
-                totalForce += Wander(wanderTime, wanderRadius);
-                totalForce += Separate();
                 totalForce += Flee(agentManager.zombie.transform.position) * fleeWeight;
+                totalForce += Wander(wanderTime, wanderRadius);
+                totalForce += StayInBoundsForce() * boundsWeight;
+                totalForce += Separate() * seperateWeight;
+                totalForce += Cohesion() * cohesionWight;
+                totalForce += Alignment() * alignmentWeight;
                 totalForce += AvoidObstacles(avoidTime) * avoidWeight;
 
                 break;
@@ -98,11 +101,15 @@ public class FSM : Agent
                 target = FindClosest() as FSM;
                 if (target == null) { break; }
 
-                totalForce += Seek(target.transform.position);
-
-                if (Vector3.Distance(transform.position, target.transform.position) < myPhysicsObject.Radius + target.myPhysicsObject.Radius)
+                // Check if the target is a HumanWanderer before applying Seek force
+                if (target.currentState == States.HumanFlee)
                 {
-                    target.SetState(States.Transformer);
+                    totalForce += Seek(target.transform.position);
+
+                    if (Vector3.Distance(transform.position, target.transform.position) < myPhysicsObject.Radius + target.myPhysicsObject.Radius)
+                    {
+                        target.SetState(States.Transformer);
+                    }
                 }
 
                 break;
