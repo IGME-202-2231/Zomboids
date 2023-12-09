@@ -41,7 +41,7 @@ public class TruckSpawner : MonoBehaviour
 
         // Calculate the spawn position at the right side of the screen
         float spawnX = Camera.main.ScreenToWorldPoint(new Vector3(Screen.width, 0, 0)).x;
-        float spawnY = Camera.main.ScreenToWorldPoint(new Vector3(0, (Screen.height / 2) + 50, 0)).y;
+        float spawnY = Camera.main.ScreenToWorldPoint(new Vector3(0, (Screen.height / 2) + 75, 0)).y;
 
         // Instantiate the truck prefab at the calculated spawn position
         GameObject truckObject = Instantiate(truckPrefab, new Vector3(spawnX, spawnY, -1), Quaternion.identity);

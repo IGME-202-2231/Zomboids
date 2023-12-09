@@ -57,7 +57,7 @@ public class BlueTruckSpawner : MonoBehaviour
     IEnumerator MoveTruck(GameObject truckObject)
     {
         // Calculate the left boundary of the screen
-        float rightBoundary = Camera.main.ScreenToWorldPoint(new Vector3(1500, 0, 0)).x;
+        float rightBoundary = Camera.main.ScreenToWorldPoint(new Vector3(2000, 0, 0)).x;
 
         while (truckObject.transform.position.x < rightBoundary)
         {
