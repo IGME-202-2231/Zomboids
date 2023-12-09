@@ -1619,12 +1619,12 @@ MonoBehaviour:
     m_LineSpacing: 1
   m_Text: 'Controls:
 
-    Right Click to spawn zombies
+    Left Click to spawn zombies
 
-    Press Space to spawn
-    trucks
+    Press Space to spawn trucks
 
-    Left Click to shoot sniper'
+    Right
+    Click to shoot sniper'
 --- !u!222 &1872527899
 CanvasRenderer:
   m_ObjectHideFlags: 0
