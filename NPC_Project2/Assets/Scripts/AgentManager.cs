@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class AgentManager : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class AgentManager : MonoBehaviour
 
     [SerializeField]
     FSM zombiePrefab;
+
+    [SerializeField]
+    FSM bulletPrefab;
 
     List<Agent> agents;
 
@@ -52,6 +56,7 @@ public class AgentManager : MonoBehaviour
     void Update()
     {
         SpawnZombie();
+        SpawnBullet();
     }
 
     private void SpawnPlayer()
@@ -76,6 +81,21 @@ public class AgentManager : MonoBehaviour
             zombie.SetState(States.Zombie);
             agents.Add(zombie);
             FlockManager.Instance.flock.Add(zombie);
+        }
+    }
+
+    private void SpawnBullet()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+
+        // Check for LMB press
+        if (Input.GetMouseButtonDown(1))
+        {
+            FSM bullet = Instantiate(bulletPrefab, mousePos, Quaternion.identity);
+
+            // Destroy the bullet after half a second
+            Destroy(bullet.gameObject, 0.5f);
         }
     }
 }

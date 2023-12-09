@@ -2,14 +2,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FlockManager : Singleton<FlockManager> { 
+public class FlockManager : Singleton<FlockManager>
+{
     // Start is called before the first frame update
-
     public List<Agent> flock = new List<Agent>();
 
     private Vector3 centerPoint;
     private Vector3 sharedDirection;
-
 
     public Vector3 SharedDirection
     {
@@ -17,14 +16,12 @@ public class FlockManager : Singleton<FlockManager> {
     }
 
     public Vector3 CenterPoint { get { return centerPoint; } }
-    void Start()
-    {
-        
-    }
 
-    // Update is called once per frame
     void Update()
     {
+        // Remove null or destroyed agents from the flock
+        flock.RemoveAll(agent => agent == null || agent.Equals(null));
+
         centerPoint = GetCenterPoint();
         sharedDirection = GetSharedDirection();
     }
@@ -32,25 +29,47 @@ public class FlockManager : Singleton<FlockManager> {
     private Vector3 GetCenterPoint()
     {
         Vector3 sumPosition = Vector3.zero;
+        int validAgentCount = 0;
 
         foreach (Agent agent in flock)
         {
-            sumPosition += agent.transform.position;
+            if (agent != null && !agent.Equals(null))
+            {
+                sumPosition += agent.transform.position;
+                validAgentCount++;
+            }
         }
 
-        return sumPosition / flock.Count;
+        if (validAgentCount > 0)
+        {
+            return sumPosition / validAgentCount;
+        }
+
+        // Return a default value if no valid agents are found
+        return Vector3.zero;
     }
 
     private Vector3 GetSharedDirection()
     {
         Vector3 sumDirection = Vector3.zero;
+        int validAgentCount = 0;
 
-        foreach(Agent agent in flock)
+        foreach (Agent agent in flock)
         {
-            sumDirection += agent.transform.up;
+            if (agent != null && !agent.Equals(null))
+            {
+                sumDirection += agent.transform.up;
+                validAgentCount++;
+            }
         }
 
-        return sumDirection.normalized;
+        if (validAgentCount > 0)
+        {
+            return sumDirection.normalized;
+        }
+
+        // Return a default value if no valid agents are found
+        return Vector3.up;
     }
 
     private void OnDrawGizmos()
@@ -60,4 +79,5 @@ public class FlockManager : Singleton<FlockManager> {
         Gizmos.DrawWireSphere(centerPoint, 0.3f);
         Gizmos.DrawLine(centerPoint, sharedDirection + centerPoint);
     }
+
 }

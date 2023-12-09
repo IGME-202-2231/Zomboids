@@ -8,7 +8,8 @@ public enum States
     HumanFlee,
     Transformer,
     Zombie,
-    Blood
+    Blood,
+    Truck
 };
 public class FSM : Agent
 {
@@ -52,26 +53,38 @@ public class FSM : Agent
     [Range(0.0f, 100.0f)]
     float fleeWeight = 1;
 
-    States currentState;
+    public States currentState;
     float countTimer;
 
     FSM target;
 
+    public Splatter splatter;
 
+    private void Start()
+    {
+        splatter = FindObjectOfType<Splatter>();
+    }
     protected override void CalcSteeringForces()
     {
+        // Check if the agentManager is null
+        if (agentManager == null)
+        {
+            // Handle the case where agentManager is null (perhaps log a message or take appropriate action)
+            return;
+        }
+
         //Switch statement for FSM
         switch (currentState)
         {
             case States.HumanWander:
                 totalForce += Wander(wanderTime, wanderRadius);
-                totalForce += StayInBoundsForce() * boundsWeight;
                 totalForce += Separate() * seperateWeight;
                 totalForce += Cohesion() * cohesionWight;
                 totalForce += Alignment() * alignmentWeight;
                 totalForce += AvoidObstacles(avoidTime) * avoidWeight;
 
-                if (agentManager != null && agentManager.ZombieSpawned)
+                // Check if agentManager and ZombieSpawned are not null before accessing them
+                if (agentManager.ZombieSpawned)
                 {
                     SetState(States.HumanFlee);
                 }
@@ -80,7 +93,6 @@ public class FSM : Agent
             case States.HumanFlee:
                 totalForce += Flee(agentManager.zombie.transform.position) * fleeWeight;
                 totalForce += Wander(wanderTime, wanderRadius);
-                totalForce += StayInBoundsForce() * boundsWeight;
                 totalForce += Separate() * seperateWeight;
                 totalForce += Cohesion() * cohesionWight;
                 totalForce += Alignment() * alignmentWeight;
@@ -99,22 +111,28 @@ public class FSM : Agent
 
             case States.Zombie:
                 target = FindClosest() as FSM;
-                if (target == null) { break; }
-
-                // Check if the target is a HumanWanderer before applying Seek force
-                if (target.currentState == States.HumanFlee)
+                // Check if the target is null before accessing it
+                if (target != null)
                 {
-                    totalForce += Seek(target.transform.position);
-
-                    if (Vector3.Distance(transform.position, target.transform.position) < myPhysicsObject.Radius + target.myPhysicsObject.Radius)
+                    // Check if the target is a HumanFlee before applying Seek force
+                    if (target.currentState == States.HumanFlee)
                     {
-                        target.SetState(States.Transformer);
+                        totalForce += Seek(target.transform.position);
+
+                        // Check for collision using Box Colliders
+                        if (CheckCollision(target.gameObject))
+                        {
+                            target.SetState(States.Transformer);
+                        }
                     }
                 }
-
                 break;
 
+            case States.Blood:
+                myPhysicsObject.StopMoving();
+                break;
         }
+
         //Everything stays in bounds all the time
         totalForce += StayInBoundsForce() * boundsWeight;
     }
@@ -129,6 +147,51 @@ public class FSM : Agent
         {
             myPhysicsObject.StopMoving();
             agentManager.zombie = this;    //Tell agentManager that this player is a zombie
+            splatter.PlaySplatSound();
         }
+
+        if (newState == States.Blood)
+        {
+            splatter.PlaySplatSound();
+        }
+    }
+
+    private bool CheckCollision(GameObject otherObject)
+    {
+        // Check if the Box Colliders of the two GameObjects are overlapping
+        BoxCollider2D myCollider = GetComponent<BoxCollider2D>();
+        BoxCollider2D otherCollider = otherObject.GetComponent<BoxCollider2D>();
+
+        if (myCollider != null && otherCollider != null)
+        {
+            return myCollider.bounds.Intersects(otherCollider.bounds);
+        }
+
+        return false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Vector3 futurePosition = CalcFuturePosition(avoidTime);
+
+        float dist = Vector3.Distance(transform.position, futurePosition) + myPhysicsObject.Radius;
+
+        Vector3 boxSize = new Vector3(myPhysicsObject.Radius * 2, dist, myPhysicsObject.Radius * 2);
+
+        Vector3 boxCenter = new Vector3(0, dist / 2, 0);
+
+        Gizmos.color = Color.green;
+        Gizmos.matrix = transform.localToWorldMatrix;
+
+        Gizmos.DrawWireCube(Vector3.zero, boxSize);
+
+        Gizmos.matrix = Matrix4x4.identity;
+
+        Gizmos.color = Color.red;
+        foreach (Vector3 pos in foundObstacles)
+        {
+            Gizmos.DrawLine(transform.position, pos);
+        }
+
     }
 }

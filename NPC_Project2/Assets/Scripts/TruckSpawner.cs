@@ -5,14 +5,22 @@ public class TruckSpawner : MonoBehaviour
 {
     public GameObject truckPrefab;
     public float truckSpeed = 5.0f;
-    public float spawnCooldown = 2.0f; // Adjust this cooldown time as needed
+    public float spawnCooldown = 2.0f;
 
     private bool canSpawn = true;
 
     private AgentManager agentManager;
 
+    [SerializeField]
+    AudioClip clickSound;
+
+    AudioSource src;
+
     private void Start()
     {
+        // Get the AudioSource component attached to the same GameObject
+        src = GetComponent<AudioSource>();
+
         // Find the AgentManager in the scene
         agentManager = FindObjectOfType<AgentManager>();
     }
@@ -36,7 +44,7 @@ public class TruckSpawner : MonoBehaviour
         float spawnY = Camera.main.ScreenToWorldPoint(new Vector3(0, (Screen.height / 2) + 50, 0)).y;
 
         // Instantiate the truck prefab at the calculated spawn position
-        GameObject truckObject = Instantiate(truckPrefab, new Vector3(spawnX, spawnY, 0), Quaternion.identity);
+        GameObject truckObject = Instantiate(truckPrefab, new Vector3(spawnX, spawnY, -1), Quaternion.identity);
 
         // Get the Obstacle component from the spawned truck
         Obstacle truckObstacle = truckObject.GetComponent<Obstacle>();
@@ -49,6 +57,9 @@ public class TruckSpawner : MonoBehaviour
 
         // Move the truck to the left side of the screen
         StartCoroutine(MoveTruck(truckObject));
+
+        // Play the click sound
+        PlaySound();
     }
 
     IEnumerator MoveTruck(GameObject truckObject)
@@ -86,4 +97,16 @@ public class TruckSpawner : MonoBehaviour
         // Set cooldown flag to allow spawning
         canSpawn = true;
     }
+
+    void PlaySound()
+    {
+        // Make sure the AudioSource component and audio clip are valid
+        if (src != null && clickSound != null)
+        {
+            // Play the click sound
+            src.Play();
+        }
+    }
+
+
 }

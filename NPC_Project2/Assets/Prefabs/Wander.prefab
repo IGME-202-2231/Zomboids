@@ -12,9 +12,11 @@ GameObject:
   - component: {fileID: 3142597154510560397}
   - component: {fileID: 6588267238877714361}
   - component: {fileID: -2099841831483374272}
+  - component: {fileID: 7295408361818601126}
+  - component: {fileID: 3815887445076984497}
   m_Layer: 0
   m_Name: Wander
-  m_TagString: Untagged
+  m_TagString: Agent
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -32,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3142597154510560397
 SpriteRenderer:
@@ -105,7 +107,7 @@ MonoBehaviour:
   gravStrength: 0
   acceleration: {x: 0, y: 0, z: 0}
   mass: 1
-  maxSpeed: 3
+  maxSpeed: 2
   radius: 1
 --- !u!114 &-2099841831483374272
 MonoBehaviour:
@@ -121,15 +123,74 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   myPhysicsObject: {fileID: 6588267238877714361}
   maxForce: 10
-  separationRange: 0.3
+  separationRange: 0.1
   wanderTime: 2
-  wanderRadius: 2
-  boundsWeight: 100000
+  wanderRadius: 4
+  boundsWeight: 1e+11
   sRenderer: {fileID: 3142597154510560397}
-  wanderWeight: 3
-  seperateWeight: 18.1
-  cohesionWight: 18.8
-  alignmentWeight: 3.5
-  avoidWeight: 15
-  avoidTime: 2
-  fleeWeight: 21.5
+  wanderWeight: 6.4
+  seperateWeight: 9.5
+  cohesionWight: 12.7
+  alignmentWeight: 2.2
+  avoidWeight: 1.7
+  avoidTime: 3
+  fleeWeight: 20.3
+  currentState: 0
+  splatter: {fileID: 8669994022593575581, guid: 54ee875e941e31a409adabd6366043c3, type: 3}
+--- !u!61 &7295408361818601126
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077780271642102232}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.05227238, y: 0.08712077}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.5, y: 2.5}
+    newSize: {x: 2.5, y: 2.5}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.4197026, y: 2.1863656}
+  m_EdgeRadius: 0
+--- !u!114 &3815887445076984497
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2077780271642102232}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 30b7dd84fa5e8ce4faa72f7d03ca8d2f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

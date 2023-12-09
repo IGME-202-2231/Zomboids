@@ -5,6 +5,8 @@ TagManager:
   serializedVersion: 2
   tags:
   - Truck
+  - Zombie
+  - Agent
   layers:
   - Default
   - TransparentFX
@@ -41,4 +43,10 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Zombie
+    uniqueID: 4026800821
+    locked: 0
+  - name: Blood
+    uniqueID: 1080507443
     locked: 0
