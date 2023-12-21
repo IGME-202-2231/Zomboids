@@ -14,16 +14,12 @@ public class TruckCollision : MonoBehaviour
         FSM fsm = collision.gameObject.GetComponent<FSM>();
 
         // Check if the collided object is a human or a zombie
-        if (fsm != null && (fsm.currentState == States.Transformer || fsm.currentState == States.HumanWander || fsm.currentState == States.Zombie || fsm.currentState == States.HumanFlee))
+        if (fsm != null && (fsm.currentState == States.Transformer || fsm.currentState == States.HumanWander || fsm.currentState == States.Zombie || fsm.currentState == States.HumanFlee || fsm.currentState == States.Corgi))
         {
             // Set the state to Blood
             fsm.SetState(States.Blood);
             splatter.PlaySplatSound();
-            // Instantiate bloodPrefab at the FSM's position and rotation
-            //Instantiate(bloodPrefab, fsm.transform.position, fsm.transform.rotation);
-
-            // Destroy the FSM object
-            //Destroy(fsm.gameObject);
+            
         }
     }
 

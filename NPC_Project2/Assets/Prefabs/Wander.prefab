@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 6588267238877714361}
   - component: {fileID: -2099841831483374272}
   - component: {fileID: 7295408361818601126}
-  - component: {fileID: 3815887445076984497}
   m_Layer: 0
   m_Name: Wander
   m_TagString: Agent
@@ -34,7 +33,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3142597154510560397
 SpriteRenderer:
@@ -109,6 +108,7 @@ MonoBehaviour:
   mass: 1
   maxSpeed: 2
   radius: 1
+  animator: {fileID: 0}
 --- !u!114 &-2099841831483374272
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -182,15 +182,3 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1.4197026, y: 2.1863656}
   m_EdgeRadius: 0
---- !u!114 &3815887445076984497
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2077780271642102232}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 30b7dd84fa5e8ce4faa72f7d03ca8d2f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 

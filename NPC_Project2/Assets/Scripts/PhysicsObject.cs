@@ -35,6 +35,8 @@ public class PhysicsObject : MonoBehaviour
     [SerializeField]
     public float radius;
 
+    public Animator animator;
+
     public float Radius
     {
         get { return radius; }
@@ -82,7 +84,12 @@ public class PhysicsObject : MonoBehaviour
         {
             ApplyGravity(Vector3.down * 9.81f); //Call Apply Gravity
         }
-        
+
+        //Declare Animator Speed for animation Transition***************************************************
+        if(animator != null)
+        {
+            animator.SetFloat("Speed", Mathf.Abs(velocity.magnitude));
+        }
 
         // Calculate the velocity for this frame - New
         velocity += acceleration * Time.deltaTime;

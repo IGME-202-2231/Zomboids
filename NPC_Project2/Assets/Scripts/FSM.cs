@@ -9,7 +9,8 @@ public enum States
     Transformer,
     Zombie,
     Blood,
-    Truck
+    Truck,
+    Corgi
 };
 public class FSM : Agent
 {
@@ -128,6 +129,25 @@ public class FSM : Agent
                 }
                 break;
 
+            case States.Corgi:
+                target = FindClosest() as FSM;
+                // Check if the target is null before accessing it
+                if (target != null)
+                {
+                    // Check if the target is a HumanFlee before applying Seek force
+                    if (target.currentState == States.Zombie || target.currentState == States.Transformer)
+                    {
+                        totalForce += Seek(target.transform.position);
+
+                        // Check for collision using Box Colliders
+                        if (CheckCollision(target.gameObject))
+                        {
+                            target.SetState(States.Blood);
+                        }
+                    }
+                }
+                break;
+
             case States.Blood:
                 myPhysicsObject.StopMoving();
                 break;
@@ -152,8 +172,18 @@ public class FSM : Agent
 
         if (newState == States.Blood)
         {
+            // Disable the Animator component
+            if (myPhysicsObject.animator != null)
+            {
+                myPhysicsObject.animator.enabled = false;
+            }
             splatter.PlaySplatSound();
         }
+
+        //if (newState == States.Corgi)
+        //{
+        //    splatter.PlaySplatSound();
+        //}
     }
 
     private bool CheckCollision(GameObject otherObject)

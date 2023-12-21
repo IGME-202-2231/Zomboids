@@ -12,6 +12,9 @@ public class AgentManager : MonoBehaviour
     FSM zombiePrefab;
 
     [SerializeField]
+    FSM corgiPrefab;
+
+    [SerializeField]
     FSM bulletPrefab;
 
     List<Agent> agents;
@@ -56,6 +59,7 @@ public class AgentManager : MonoBehaviour
     void Update()
     {
         SpawnZombie();
+        SpawnCorgi();
         SpawnBullet();
     }
 
@@ -81,6 +85,22 @@ public class AgentManager : MonoBehaviour
             zombie.SetState(States.Zombie);
             agents.Add(zombie);
             FlockManager.Instance.flock.Add(zombie);
+        }
+    }
+
+    private void SpawnCorgi()
+    {
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        mousePos.z = 0f;
+
+        // Check for LMB press
+        if (Input.GetMouseButtonDown(2))
+        {
+            FSM corgi = Instantiate(corgiPrefab, mousePos, Quaternion.identity);
+            corgi.AgentManager = this;
+            //corgi.SetState(States.Corgi);
+            agents.Add(corgi);
+            FlockManager.Instance.flock.Add(corgi);
         }
     }
 
